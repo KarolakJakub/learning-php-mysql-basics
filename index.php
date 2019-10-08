@@ -1,14 +1,9 @@
 <?php
 
-function sayHello($name = "Adam")
-{
-    echo 'hello  $name  <br/>';
-}
+include 'users.php';
+require 'users.php';
 
-function printProduct($product)
-{
-    return "{$product['name']} costs {$product['price']} <br/>";
-}
+echo 'EoF';
 
 ?>
 
@@ -23,10 +18,8 @@ function printProduct($product)
 </head>
 
 <body>
-    <?php sayHello('Janusz');
-    sayHello();
-    echo printProduct(['name' => 'produkt', 'price' => 20]);
-    ?>
+
+<?php include 'content.php'?>
 
 </body>
 
