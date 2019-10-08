@@ -1,3 +1,13 @@
+<?php
+
+    if(isset($_POST['submit'])){
+        echo $_POST['email'];
+        echo $_POST['name'];
+        echo $_POST['ingridents'];
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +18,7 @@
     <section class="container">
 
         <h4 class="center">Add a Pizza</h4>
-        <form action="" class="white" method=''>
+        <form action="" class="white" action="add.php" method='POST'>
             <label>Your Email:</label>
             <input type='text' name='email'>
             <label>Pizza name:</label>
