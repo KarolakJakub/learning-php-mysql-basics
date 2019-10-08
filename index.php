@@ -1,8 +1,14 @@
 <?php
 
-define('NAME', 'Andrzej');
+function sayHello($name = "Adam")
+{
+    echo 'hello  $name  <br/>';
+}
 
-$name = "Jakub";
+function printProduct($product)
+{
+    return "{$product['name']} costs {$product['price']} <br/>";
+}
 
 ?>
 
@@ -17,7 +23,11 @@ $name = "Jakub";
 </head>
 
 <body>
-    <?php echo NAME ?>
+    <?php sayHello('Janusz');
+    sayHello();
+    echo printProduct(['name' => 'produkt', 'price' => 20]);
+    ?>
+
 </body>
 
 </html>
