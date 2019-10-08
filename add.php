@@ -1,29 +1,38 @@
 <?php
 
-    if(isset($_POST['submit'])){
-        // echo htmlspecialchars($_POST['email']);
-        // echo htmlspecialchars($_POST['name']);
-        // echo htmlspecialchars($_POST['ingridents']);
+if (isset($_POST['submit'])) {
+    // echo htmlspecialchars($_POST['email']);
+    // echo htmlspecialchars($_POST['name']);
+    // echo htmlspecialchars($_POST['ingridents']);
 
-        if(empty($_POST['email'])){
-            echo 'an email is requried <br />';
-        } else {
-            echo htmlspecialchars($_POST['email']);
+    if (empty($_POST['email'])) {
+        echo 'an email is requried <br />';
+    } else {
+        $email = $_POST['email'];
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo 'email is not vaild<br/>';
         }
-
-        if(empty($_POST['name'])){
-            echo 'a name is requried <br />';
-        } else {
-            echo htmlspecialchars($_POST['name']);
-        }
-        
-        if(empty($_POST['ingridents'])){
-            echo 'ingridents are requried <br />';
-        } else {
-            echo htmlspecialchars($_POST['ingridents']);
-        }
-
     }
+
+    if (empty($_POST['name'])) {
+        echo 'a name is requried <br />';
+    } else {
+        $name = $_POST['name'];
+        if(!preg_match('/^[a-zA-Z\s]+$/', $name)){
+            echo 'name must be letters only<br/>';
+        }
+       
+    }
+
+    if (empty($_POST['ingridents'])) {
+        echo 'ingridents are requried <br />';
+    } else {
+        $ingridents = $_POST['ingridents'];
+        if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $ingridents)){
+            echo 'ingridents must be letters only and comma separeted<br/>';
+        }
+    }
+}
 
 ?>
 
