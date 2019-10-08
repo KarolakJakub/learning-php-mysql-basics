@@ -1,9 +1,28 @@
 <?php
 
     if(isset($_POST['submit'])){
-        echo htmlspecialchars($_POST['email']);
-        echo htmlspecialchars($_POST['name']);
-        echo htmlspecialchars($_POST['ingridents']);
+        // echo htmlspecialchars($_POST['email']);
+        // echo htmlspecialchars($_POST['name']);
+        // echo htmlspecialchars($_POST['ingridents']);
+
+        if(empty($_POST['email'])){
+            echo 'an email is requried <br />';
+        } else {
+            echo htmlspecialchars($_POST['email']);
+        }
+
+        if(empty($_POST['name'])){
+            echo 'a name is requried <br />';
+        } else {
+            echo htmlspecialchars($_POST['name']);
+        }
+        
+        if(empty($_POST['ingridents'])){
+            echo 'ingridents are requried <br />';
+        } else {
+            echo htmlspecialchars($_POST['ingridents']);
+        }
+
     }
 
 ?>
