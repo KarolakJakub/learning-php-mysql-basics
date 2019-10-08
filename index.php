@@ -1,29 +1,57 @@
 <?php
 
-    $conn = mysqli_connect('localhost', 'Jakub', '1234', 'pizza_portal');
+$conn = mysqli_connect('localhost', 'Jakub', '1234', 'pizza_portal');
 
-    if(!$conn){
-        echo 'no connection ';
-        echo mysqli_connect_error();
-    }
+if (!$conn) {
+    echo 'no connection ';
+    echo mysqli_connect_error();
+}
 
-    $sql = 'SELECT title, ingredients, id FROM pizzas';
+$sql = 'SELECT title, ingredients, id FROM pizzas ORDER BY created_at';
 
-    $result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $sql);
 
-    $pizzas = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$pizzas = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    mysqli_free_result($result);
+mysqli_free_result($result);
 
-    mysqli_close($conn);
+mysqli_close($conn);
 
-    print_r($pizzas);
+// print_r(explode(',', $pizzas[0]['ingredients']));
 
 ?>
 
 <!DOCTYPE html>
 
-    <?php include 'templates/header.php' ?>
-    <?php include 'templates/footer.php' ?>
+<?php include 'templates/header.php' ?>
+
+<h4 class="center">Pizzas:</h4>
+
+<div class='container'>
+    <div class="row">
+        <?php foreach ($pizzas as $pizza) { ?>
+
+            <div class="col s6 md3">
+                <div class="card">
+                    <div class="card-content center">
+                        <h6><?php echo htmlspecialchars($pizza['title']) ?></h6>
+                        <ul>
+                            <?php foreach (explode(',', $pizza['ingredients']) as $ing) { ?>
+                                <li><?php echo htmlspecialchars($ing)?></li>
+                            <?php
+                                } ?>
+                        </ul>
+                    </div>
+                    <div class="card-action right-align">
+                        <a href="#">more info</a>
+                    </div>
+                </div>
+            </div>
+
+        <?php } ?>
+    </div>
+</div>
+
+<?php include 'templates/footer.php' ?>
 
 </html>
