@@ -1,9 +1,9 @@
 <?php
 
     if(isset($_POST['submit'])){
-        echo $_POST['email'];
-        echo $_POST['name'];
-        echo $_POST['ingridents'];
+        echo htmlspecialchars($_POST['email']);
+        echo htmlspecialchars($_POST['name']);
+        echo htmlspecialchars($_POST['ingridents']);
     }
 
 ?>
