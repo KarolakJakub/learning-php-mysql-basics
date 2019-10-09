@@ -1,6 +1,6 @@
 <?php
 
-
+include('config/db_connect.php');
 
 $errors = array('email' => '', 'name' => '', 'ingredients' => '');
 
@@ -33,44 +33,53 @@ if (isset($_POST['submit'])) {
             $errors['ingredients'] = 'ingredients must be letters only and comma separeted<br/>';
         }
     }
+    if (!array_filter($errors)) {
+
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $title = mysqli_real_escape_string($conn, $_POST['name']);
+        $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
+
+        $sql = "INSERT INTO pizzas(title,email,ingredients) VALUES('$title','$email','$ingredients')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo 'success';
+        } else {
+            echo 'failed' . mysqli_error($conn);
+        }
+
+        header('Location: index.php');
+    }
 } else {
     $name = $email = $ingredients = '';
 }
 
-if(!array_filter($errors)){
-    header('Location: index.php');
-}
+
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
 
-<body>
 
-    <?php include 'templates/header.php' ?>
 
-    <section class="container">
+<?php include 'templates/header.php' ?>
 
-        <h4 class="center">Add a Pizza</h4>
-        <form action="" class="white" action="add.php" method='POST'>
-            <label>Your Email:</label>
-            <input type='text' name='email' value='<?php echo htmlspecialchars($email) ?>'>
-            <div class="red-text"><?php echo $errors['email'] ?></div>
-            <label>Pizza name:</label>
-            <input type='text' name='name' value='<?php echo htmlspecialchars($name) ?>'>
-            <div class="red-text"><?php echo $errors['name'] ?></div>
-            <label>Ingridents:</label>
-            <input type='text' name='ingredients' value='<?php echo htmlspecialchars($ingredients) ?>'>
-            <div class="red-text"><?php echo $errors['ingredients'] ?></div>
-            <div class="center">
-                <input type="submit" name="submit" value="submit" class="btn">
-            </div>
-        </form>
-    </section>
+<section class="container">
 
-    <?php include 'templates/footer.php' ?>
+    <h4 class="center">Add a Pizza</h4>
+    <form action="" class="white" action="add.php" method='POST'>
+        <label>Your Email:</label>
+        <input type='text' name='email' value='<?php echo htmlspecialchars($email) ?>'>
+        <div class="red-text"><?php echo $errors['email'] ?></div>
+        <label>Pizza name:</label>
+        <input type='text' name='name' value='<?php echo htmlspecialchars($name) ?>'>
+        <div class="red-text"><?php echo $errors['name'] ?></div>
+        <label>Ingridents:</label>
+        <input type='text' name='ingredients' value='<?php echo htmlspecialchars($ingredients) ?>'>
+        <div class="red-text"><?php echo $errors['ingredients'] ?></div>
+        <div class="center">
+            <input type="submit" name="submit" value="submit" class="btn">
+        </div>
+    </form>
+</section>
 
-</body>
-
-</html>
+<?php include 'templates/footer.php' ?>

@@ -1,11 +1,6 @@
 <?php
 
-$conn = mysqli_connect('localhost', 'Jakub', '1234', 'pizza_portal');
-
-if (!$conn) {
-    echo 'no connection ';
-    echo mysqli_connect_error();
-}
+include('config/db_connect.php');
 
 $sql = 'SELECT title, ingredients, id FROM pizzas ORDER BY created_at';
 
@@ -29,7 +24,7 @@ mysqli_close($conn);
 
 <div class='container'>
     <div class="row">
-        <?php foreach ($pizzas as $pizza) { ?>
+        <?php foreach ($pizzas as $pizza) : ?>
 
             <div class="col s6 md3">
                 <div class="card">
@@ -48,10 +43,9 @@ mysqli_close($conn);
                 </div>
             </div>
 
-        <?php } ?>
+                            <?php endforeach; ?>
     </div>
 </div>
 
 <?php include 'templates/footer.php' ?>
 
-</html>
